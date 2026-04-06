@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngủ ngon!</title>
+    <style>
+        :root {
+            --primary-pink: #ff85a2;
+            --soft-purple: #a29bfe;
+            --bg-color: #fff5f7;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            z-index: 10;
+            padding: 20px;
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: 3rem;
+            text-shadow: 2px 2px #fff;
+            animation: bounce 2s infinite;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        #message {
+            display: none;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            background: var(--soft-purple);
+            border-radius: 50%;
+            opacity: 0.7;
+            z-index: 1;
+            animation: float up 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        button {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="header">Ngủ ngon nha mìnhhhh! 🎂</h1>
+        
+        <div class="card" onclick="revealMessage()">
+            <div id="gift-icon" style="font-size: 50px;">🎁</div>
+            <p id="instruction">Mở quà i!</p>
+            <div id="message">
+                <h3>Chào mình,</h3>
+                <p>Muộn rồi nên mình ngủ sớm đi nha, thật ra là dm vẫn rất sớm nma vừa mò ra cách làm cái này nma k nghĩ ra để cái gì nên tạm i.</p>
+                <p><strong>Ngủ thôi! 🎈</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealMessage() {
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('instruction').style.display = 'none';
+            document.getElementById('gift-icon').innerHTML = '✨';
+            createBalloons();
+        }
+
+        function createBalloons() {
+            for(let i=0; i<15; i++) {
+                let balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 80%)`;
+                balloon.style.animationDelay = (Math.random() * 5) + 's';
+                document.body.appendChild(balloon);
+            }
+        }
+    </script>
+</body>
+</html>
